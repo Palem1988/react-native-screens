@@ -39,6 +39,9 @@ export const NativeScreenContainer = requireNativeComponent(
 );
 
 export class Screen extends React.Component {
+  static defaultProps = {
+    style: StyleSheet.absoluteFill,
+  };
   setNativeProps(props) {
     this._ref.setNativeProps(props);
   }
@@ -62,7 +65,7 @@ export class Screen extends React.Component {
         <AnimatedNativeScreen
           {...rest}
           ref={this.setRef}
-          style={StyleSheet.absoluteFill}>
+          style={this.props.style}>
           {/*
             We need to wrap children in additional Animated.View because
             of a bug in native driver preventing from both `active` and `styles`
@@ -70,7 +73,9 @@ export class Screen extends React.Component {
             react-native/pull/20658 is merged we can export native screen directly
             and avoid wrapping with `Animated.View`.
           */}
-          <Animated.View style={style}>{children}</Animated.View>
+          <Animated.View style={this.props.contentContainerStyle}>
+            {children}
+          </Animated.View>
         </AnimatedNativeScreen>
       );
     }

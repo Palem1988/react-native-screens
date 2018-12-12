@@ -10,7 +10,9 @@ declare module 'react-native-screens' {
 
   export interface ScreenProps extends ViewProps {
     active?: boolean;
+    contentContainerStyle?: object;
     onComponentRef?: (view: any) => void;
+    style: object;
   }
   export const Screen: ComponentClass<ScreenProps>;
 
